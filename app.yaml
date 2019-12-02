@@ -1,0 +1,36 @@
+runtime: php72
+
+env_variables: ## Put production environment variables here.
+  APP_KEY: base64:PtrssHIBOxwiW8FfiKrJMmeC/aZhYunRe5QlRp1GWz4=
+  APP_DEBUG: true
+
+  APP_STORAGE: /tmp
+  VIEW_COMPILED_PATH: /tmp
+
+  LOG_CHANNEL: stackdriver
+  CACHE_DRIVER: database
+  SESSION_DRIVER: database
+  QUEUE_DRIVER: database
+
+  ## Set these environment variables according to your CloudSQL configuration.
+  DB_CONNECTION: mysql
+  DB_HOST: localhost
+  DB_PORT: 3306
+  DB_DATABASE: adria
+  DB_USERNAME: root
+  DB_PASSWORD: 7ni1ifIa2qF2jIND
+  DB_SOCKET: "/cloudsql/stellar-chemist-252118:europe-west2:eventum-cloudsql"
+
+handlers:
+  - url: /favicon\.ico
+    static_files: public/favicon.ico
+    upload: public/favicon\.ico
+
+  - url: /(.*\.(htm$|html$|css$|js$|png$|jpg$|svg$))
+    static_files: public/\1
+    upload: public/(.*\.(htm$|html$|css$|js$|png$|jpg$|svg$))
+
+  - url: /.*
+    secure: always
+    redirect_http_response_code: 301
+    script: auto
